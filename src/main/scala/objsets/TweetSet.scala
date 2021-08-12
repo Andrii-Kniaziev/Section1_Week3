@@ -32,7 +32,7 @@ class Tweet(val user: String, val text: String, val retweets: Int) {
  *
  * [1] http://en.wikipedia.org/wiki/Binary_search_tree
  */
-abstract class TweetSet {
+abstract class TweetSet extends TweetSetInterface {
 
   /**
    * This method takes a predicate and returns a subset of all the elements
@@ -127,7 +127,7 @@ class Empty extends TweetSet {
 
   def contains(tweet: Tweet): Boolean = false
 
-  def incl(tweet: Tweet): TweetSet = new NonEmpty(tweet, new Empty, new Empty)
+  def incl(tweet: Tweet): TweetSet = NonEmpty(tweet, Empty(), Empty())
 
   def remove(tweet: Tweet): TweetSet = this
 
@@ -238,3 +238,4 @@ object Main extends App {
   // Print the trending tweets
   GoogleVsApple.trending foreach println
 }
+
